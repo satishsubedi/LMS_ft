@@ -16,6 +16,7 @@ import {
   ReviewsPage,
   UserPage,
   ProfilePage,
+  Verify_UserPage,
 } from "../pages";
 import { DefaultLayout } from "@components/layouts/DefaultLayout";
 import { UserLayout } from "@components/layouts/UserLayout";
@@ -27,7 +28,7 @@ const AppRoute = () => {
         <Route index element={<HomePage />} />
         <Route path="signup" element={<SignUpPage />} />
         <Route path="login" element={<SignInPage />} />
-        <Route path="login" element={<SignInPage />} />
+        <Route path="activate-user" element={<Verify_UserPage />} />
         <Route path="forget-password" element={<ForgetPassword />} />
       </Route>
       {/* private page */}

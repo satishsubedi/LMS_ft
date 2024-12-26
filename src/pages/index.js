@@ -1,6 +1,7 @@
 export { default as HomePage } from "../pages/home/HomePage";
 export { default as DashboardPage } from "../pages/dashboard/DashboardPage";
 export { default as SignInPage } from "../pages/auth/SignInPage";
+export { default as Verify_UserPage } from "../pages/auth/Verify_UserPage";
 export { default as SignUpPage } from "../pages/auth/SignUpPage";
 export { default as ForgetPassword } from "../pages/auth/ForgetPassword";
 
