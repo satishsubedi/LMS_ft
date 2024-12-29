@@ -1,11 +1,26 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-export const apiProcessor = async ({ url, method, payload, showToast }) => {
+const getaccesstoken = () => {
+  return sessionStorage.getItem("accesstoken");
+};
+
+export const apiProcessor = async ({
+  url,
+  method,
+  payload,
+  showToast,
+  isPrivate,
+}) => {
   try {
+    const headers = {};
+    if (isPrivate) {
+      headers.authorization = "Bearer " + getaccesstoken();
+    }
     const responsePending = axios({
       url,
       method,
       data: payload,
+      headers,
     });
     // console.log(response);
 

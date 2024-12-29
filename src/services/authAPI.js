@@ -26,3 +26,16 @@ export const verifyNewUserApi = async (payload) => {
   // return result;
   return apiProcessor(obj);
 };
+
+export const signInUserApi = async (payload) => {
+  const obj = {
+    url: authApiEp + "/login",
+    method: "post",
+    payload,
+    showToast: true,
+  };
+  // const result = await apiProcessor(obj);
+  // console.log(result);
+  // return result;
+  return apiProcessor(obj);
+};
