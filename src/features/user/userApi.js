@@ -6,7 +6,7 @@ export const fetchUserApi = async () => {
   const obj = {
     url: userApiEp + "/profile",
     method: "get",
-    showToast: true,
+    // showToast: true,
     isPrivate: true,
   };
   return apiProcessor(obj);

@@ -20,6 +20,7 @@ const Verify_UserPage = () => {
           sessionid,
           t,
         });
+        console.log(result);
         setResponse(result);
         setShowSpinner(false);
         shouldFetchRef.current = false;

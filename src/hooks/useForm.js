@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { validator } from "../utils/validator";
 
-const handleOnChange = ({ e, form, setForm }) => {
+const handleOnChange = ({ e, formdata, setFormdata }) => {
   const { name, value } = e.target;
-  setForm({
-    ...form,
+  setFormdata({
+    ...formdata,
     [name]: value,
   });
+  console.log(formdata);
 };
 
 export const useForm = (intialstate) => {
@@ -19,7 +20,8 @@ export const useForm = (intialstate) => {
   return {
     form,
     setForm,
-    handleOnChange: (e) => handleOnChange({ e, form, setForm }),
+    handleOnChange: (e) =>
+      handleOnChange({ e, formdata: form, setFormdata: setForm }),
     passworderror,
   };
 };

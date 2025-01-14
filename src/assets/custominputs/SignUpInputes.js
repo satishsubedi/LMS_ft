@@ -1,6 +1,7 @@
 // import { useForm } from "../../hooks/useForm";
 
 // const { form } = useForm();
+
 export const SignUpInputes = [
   {
     label: "First Name",
@@ -8,6 +9,7 @@ export const SignUpInputes = [
     type: "text",
     name: "fName",
     placeholder: "Adam",
+    // value: "",
     // value: form.fName,
   },
   {
@@ -16,6 +18,7 @@ export const SignUpInputes = [
     type: "text",
     name: "lName",
     placeholder: "Will",
+    // value: "",
     // value: form.lName,
   },
   {
@@ -24,6 +27,7 @@ export const SignUpInputes = [
     type: "email",
     name: "email",
     placeholder: "Adam",
+    // value: "",
     // value: form.email,
   },
   {
@@ -31,6 +35,7 @@ export const SignUpInputes = [
     type: "number",
     name: "phone",
     placeholder: "9856789677",
+    // value: "",
     // value: form.phone,
   },
   {
@@ -39,6 +44,8 @@ export const SignUpInputes = [
     type: "password",
     name: "password",
     placeholder: "*******",
+    // value: "",
+
     // value: form.password,
   },
   {
@@ -47,6 +54,7 @@ export const SignUpInputes = [
     type: "password",
     name: "confirmpassword",
     placeholder: "*******",
+    // value: "",
     // value: form.confirmpassword,
   },
 ];

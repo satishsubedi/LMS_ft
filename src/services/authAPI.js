@@ -21,9 +21,7 @@ export const verifyNewUserApi = async (payload) => {
     payload,
     // showToast: true,
   };
-  // const result = await apiProcessor(obj);
-  // console.log(result);
-  // return result;
+
   return apiProcessor(obj);
 };
 
@@ -37,5 +35,25 @@ export const signInUserApi = async (payload) => {
   // const result = await apiProcessor(obj);
   // console.log(result);
   // return result;
+  return apiProcessor(obj);
+};
+
+export const fetchNewAccessJWTApi = async () => {
+  const obj = {
+    url: authApiEp + "/renew-jwt",
+    method: "get",
+    isPrivate: true,
+
+    isRefreshJWT: true,
+  };
+  return apiProcessor(obj);
+};
+
+export const logoutUserApi = async () => {
+  const obj = {
+    url: authApiEp + "/logout",
+    method: "get",
+    isPrivate: true,
+  };
   return apiProcessor(obj);
 };
