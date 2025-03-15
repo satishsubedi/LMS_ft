@@ -1,6 +1,12 @@
 .main {
   min-height: 80vh;
+  /* width: calc(100% - 200px); */
 }
+.user-main {
+  min-height: 80vh;
+  width: calc(100% - 200px);
+}
+
 .signinbackground {
   min-height: 100vh;
   background: url(./assets/lmslogin.jpg) center no-repeat;

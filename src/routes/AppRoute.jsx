@@ -35,7 +35,8 @@ const AppRoute = () => {
       <Route path="/user" element={<UserLayout />}>
         <Route index element={<DashboardPage />} />
         <Route path="books" element={<Books />} />
-        <Route path="edit-book" element={<EditPage />} />
+        <Route path="new-book" element={<NewBookPage />} />
+        <Route path="edit-book/:_id" element={<EditPage />} />
         <Route path="borrow-history" element={<BorrowHistoryPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
         <Route path="all" element={<UserPage />} />

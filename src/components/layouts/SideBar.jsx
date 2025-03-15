@@ -30,6 +30,11 @@ export const SideBar = () => {
         </Link>
       </div>
       <div className="p-2">
+        <Link className="nav-link" to="/user/reviews">
+          <AiFillProfile /> Reviews
+        </Link>
+      </div>
+      <div className="p-2">
         <Link className="nav-link" to="/user/profile">
           <AiFillProfile /> Profile
         </Link>

@@ -11,7 +11,7 @@ import {
   autoLoginUser,
   fetchUserAction,
 } from "../../features/user/userAction.js";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const initialState = {};
 const SignInPage = () => {
   const { form, handleOnChange } = useForm(initialState);
@@ -19,8 +19,11 @@ const SignInPage = () => {
   const navigate = useNavigate();
   const showSpinnerRef = useRef(true);
   const { user } = useSelector((state) => state.userInfo);
+  const location = useLocation();
+  console.log(location);
+  const path = location?.state?.from ?? "/user";
   useEffect(() => {
-    user?._id ? navigate("/user") : dispatch(autoLoginUser());
+    user?._id ? navigate(path) : dispatch(autoLoginUser());
     if (
       sessionStorage.getItem("accesstoken") ||
       localStorage.getItem("refreshtoken")
