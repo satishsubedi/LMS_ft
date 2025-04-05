@@ -12,6 +12,10 @@ import { RiDashboard3Fill } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { logoutUserApi } from "../../services/authAPI";
 import { setUser } from "../../features/user/userSlice";
+import { Form } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
+
+import InputGroup from "react-bootstrap/InputGroup";
 export const Header = () => {
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
@@ -30,35 +34,54 @@ export const Header = () => {
         <Link to="/" className="nav-link">
           <img src={logo} width="50px" alt="" />
         </Link>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Link className="nav-link " to="/">
-              <IoHome /> Home
-            </Link>
-            {user?._id ? (
-              <>
-                <Link className="nav-link " to="/user">
-                  <RiDashboard3Fill />
-                  Dashboard
-                </Link>
-                <Link className="nav-link " to="/" onClick={handleOnLogOut}>
-                  <IoIosLogOut />
-                  Log Out
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link className="nav-link " to="/signup">
-                  <VscSignIn />
-                  Sign Up
-                </Link>
-                <Link className="nav-link " to="/login">
-                  <VscSignOut /> Login
-                </Link>
-              </>
-            )}
-          </Nav>
+
+        <Navbar.Collapse id="basic-navbar-nav " className="mt-2">
+          <div className="w-100 d-flex justify-content-between flex-column flex-md-row">
+            <div></div>
+
+            <Form style={{ width: "40%" }}>
+              <InputGroup>
+                <Form.Control
+                  placeholder="Search Book"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                />
+                <InputGroup.Text id="basic-addon2" className="bg-warning">
+                  <FaSearch />
+                </InputGroup.Text>
+              </InputGroup>
+            </Form>
+
+            <Nav>
+              <Link className="nav-link " to="/">
+                <IoHome /> Home
+              </Link>
+              {user?._id ? (
+                <>
+                  <Link className="nav-link " to="/user">
+                    <RiDashboard3Fill />
+                    Dashboard
+                  </Link>
+                  <Link className="nav-link " to="/" onClick={handleOnLogOut}>
+                    <IoIosLogOut />
+                    Log Out
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link className="nav-link " to="/signup">
+                    <VscSignIn />
+                    Sign Up
+                  </Link>
+                  <Link className="nav-link " to="/login">
+                    <VscSignOut /> Login
+                  </Link>
+                </>
+              )}
+            </Nav>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

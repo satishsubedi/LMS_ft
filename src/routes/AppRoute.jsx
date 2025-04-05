@@ -27,6 +27,7 @@ const AppRoute = () => {
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
         <Route path="signup" element={<SignUpPage />} />
+        <Route path="/book/public/:slug" element={<BookLandingPage />} />
         <Route path="login" element={<SignInPage />} />
         <Route path="activate-user" element={<Verify_UserPage />} />
         <Route path="forget-password" element={<ForgetPassword />} />
@@ -35,7 +36,8 @@ const AppRoute = () => {
       <Route path="/user" element={<UserLayout />}>
         <Route index element={<DashboardPage />} />
         <Route path="books" element={<Books />} />
-        <Route path="edit-book" element={<EditPage />} />
+        <Route path="new-book" element={<NewBookPage />} />
+        <Route path="edit-book/:_id" element={<EditPage />} />
         <Route path="borrow-history" element={<BorrowHistoryPage />} />
         <Route path="reviews" element={<ReviewsPage />} />
         <Route path="all" element={<UserPage />} />

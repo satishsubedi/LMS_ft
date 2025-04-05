@@ -10,7 +10,7 @@ import { getOTP, resetPasswordApi } from "../../services/authAPI.js";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {};
-const RequestOTPAgain = 60;
+const RequestOTPAgain = 10;
 const ForgetPassword = () => {
   const navigate = useNavigate();
   const emailRef = useRef("");
@@ -25,6 +25,8 @@ const ForgetPassword = () => {
     if (counter > 0) {
       const timer = setInterval(() => setCounter(counter - 1), 1000);
       return () => clearInterval(timer);
+    } else {
+      setIsBtnDisabled(false);
     }
   }, [counter]);
   const handleOnSubmit = async (e) => {
@@ -34,28 +36,22 @@ const ForgetPassword = () => {
     setIsBtnDisabled(true);
     const { status } = await getOTP({ email });
     status === "success" && setPasswordReset(true);
-    setCounter(RequestOTPAgain);
-    setIsOTPPending(true);
+    setIsOTPPending(false);
     setIsBtnDisabled(true);
+    setCounter(RequestOTPAgain);
   };
   const handleOnPasswordReset = async (e) => {
     e.preventDefault();
-    console.log(form);
-    // const {email,otp,newpassword}=
     const payload = {
       email: form.email,
       otp: form.otp,
       password: form.newpassword,
     };
     const response = await resetPasswordApi(payload);
-    console.log(response);
     if (response?.status === "success") {
-      console.log("hiii");
       setTimeout(() => navigate("/Login"), 3000);
-      console.log("login");
     }
   };
-  console.log(form);
 
   return (
     <div className="signinbackground d-flex justify-content-center align-items-center">
@@ -64,36 +60,31 @@ const ForgetPassword = () => {
           <Card.Body>
             <Card.Title>Forget Password 😒😒!!</Card.Title>
             <p>Fill up the form below to request the otp</p>
-            {!passwordreset && (
-              <>
-                <Form onSubmit={handleOnSubmit}>
-                  <CustomInput
-                    label="Email Address"
-                    name="email"
-                    type="email"
-                    placeholder="Enter Email"
-                    required
-                    // onChange={handleOnChange}
-                    passRef={emailRef}
-                  />
 
-                  <div className="d-grid">
-                    <Button type="submit" disabled={isBtnOTPdisabled}>
-                      {isOTPpending ? (
-                        <Spinner animation="border" variant="warning" />
-                      ) : (
-                        "Request OTP"
-                      )}
-                    </Button>
-                  </div>
-                </Form>
-                <hr />
-              </>
-            )}
+            <Form onSubmit={handleOnSubmit}>
+              <CustomInput
+                label="Email Address"
+                name="email"
+                type="email"
+                placeholder="Enter Email"
+                required
+                passRef={emailRef}
+              />
+
+              <div className="d-grid">
+                <Button type="submit" disabled={isBtnOTPdisabled}>
+                  {!isOTPpending
+                    ? // <Spinner animation="border" variant="warning" />
+                      "Request OTP"
+                    : `Request OTP in  ${counter}`}
+                </Button>
+              </div>
+            </Form>
 
             {passwordreset && (
               <>
                 <p> Request OTP after {counter} sec</p>
+
                 <Alert className="bg-success">
                   Please check the email for the password reset
                 </Alert>
@@ -141,7 +132,6 @@ const ForgetPassword = () => {
                 </ul>
               </>
             )}
-
             <div className="text-end my-3">
               Login Here ? <a href="/Login">Login</a>
             </div>

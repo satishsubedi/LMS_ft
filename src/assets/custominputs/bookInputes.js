@@ -1,0 +1,53 @@
+export const bookInputes = [
+  {
+    label: "Title",
+    required: true,
+    type: "text",
+    name: "title",
+    placeholder: "The Great GAtsby",
+  },
+  {
+    label: "Year",
+    required: true,
+    type: "number",
+    name: "year",
+    placeholder: "1990",
+    max: new Date().getFullYear(),
+  },
+  {
+    label: "Author",
+    required: true,
+    type: "text",
+    name: "author",
+    placeholder: "F. Scott Fitzgerald",
+  },
+  // {
+  //   label: "ImageUrl",
+  //   type: "url",
+  //   name: "imgUrl",
+  //   placeholder: "https://placeurllink.com",
+  // },
+  {
+    label: "ISBN",
+    required: true,
+    type: "number",
+    name: "isbn",
+    placeholder: "1234567890",
+  },
+  {
+    label: "Genre",
+    required: true,
+    type: "text",
+    name: "genre",
+    placeholder: "Fiction",
+  },
+  {
+    label: "Description",
+    required: true,
+    type: "text",
+    as: "textarea",
+    // rows: 3,
+    name: "description",
+    placeholder: "Describe about the book here",
+  },
+];
