@@ -11,7 +11,6 @@ const Verify_UserPage = () => {
   const shouldFetchRef = useRef(true);
   const sessionid = searchParams.get("sessionid");
   const t = searchParams.get("t");
-  console.log(sessionid, t);
   useEffect(() => {
     if (sessionid && t && shouldFetchRef.current) {
       // call api
@@ -20,7 +19,7 @@ const Verify_UserPage = () => {
           sessionid,
           t,
         });
-        console.log(result);
+
         setResponse(result);
         setShowSpinner(false);
         shouldFetchRef.current = false;

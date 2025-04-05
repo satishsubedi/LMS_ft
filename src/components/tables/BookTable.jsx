@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 const BookTable = () => {
   const { books } = useSelector((state) => state.bookInfo);
   const [displaybook, setDisplayBook] = useState([]);
-  console.log(books);
+  const now = new Date();
   const handleOnsearch = (e) => {
     const { value } = e.target;
     console.log(value);
@@ -38,6 +38,7 @@ const BookTable = () => {
             <th>Thumbnail</th>
             <th>Name</th>
             <th>Is Available</th>
+            <th>Number of Days</th>
             <th>Edit</th>
           </tr>
         </thead>
@@ -69,6 +70,26 @@ const BookTable = () => {
                     ? "yes"
                     : !availability && expectedAvailable
                     ? expectedAvailable.slice(0, 10)
+                    : "NA"}
+                </td>
+                <td>
+                  {availability
+                    ? "YES"
+                    : !availability && expectedAvailable
+                    ? Math.ceil(
+                        (new Date(expectedAvailable) - now) /
+                          (1000 * 60 * 60 * 24)
+                      ) > 0
+                      ? Math.ceil(
+                          (new Date(expectedAvailable) - now) /
+                            (1000 * 60 * 60 * 24)
+                        ) + " day(s) in"
+                      : Math.abs(
+                          Math.ceil(
+                            (new Date(expectedAvailable) - now) /
+                              (1000 * 60 * 60 * 24)
+                          )
+                        ) + " day(s) ago"
                     : "NA"}
                 </td>
                 <td>

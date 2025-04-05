@@ -3,6 +3,7 @@ import { validator } from "../utils/validator";
 
 const handleOnChange = ({ e, formdata, setFormdata }) => {
   let { name, value, checked } = e.target;
+
   if (name === "status") {
     console.log(name, value, checked);
     value = checked ? "active" : "inactive";

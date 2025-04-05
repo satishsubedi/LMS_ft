@@ -1,27 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import CustomInput from "../../custominput/CustomInput";
 import { useForm } from "../../../hooks/useForm";
 import { editbookInputes } from "../../../assets/custominputs/editbookInputes";
 import { useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteBookApi, updateBookApi } from "../../../features/book/bookApi";
+import { adminFetchBookAction } from "../../../features/book/bookAction";
 
 const initialState = {};
 const EditBookForm = () => {
   const { _id } = useParams();
   const { form, setForm, handleOnChange } = useForm(initialState);
   const { books } = useSelector((state) => state.bookInfo);
+  console.log(books.imageList);
   const navigate = useNavigate();
   const [images, setImages] = useState([]);
   const [imagestodelete, setImagesToDelete] = useState([]);
+  const dispatch = useDispatch();
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
-    if (form._id !== _id) {
-      const selectedbook = books.find((book) => book._id === _id);
-      selectedbook?._id ? setForm(selectedbook) : navigate("/user/books");
-    }
-  }, []);
+    // if (form._id !== _id) {
+    //   const selectedbook = books.find((book) => book._id === _id);
+    //   selectedbook?._id ? setForm(selectedbook) : navigate("/user/books");
+    // }
+    // if (form._id === _id) {
+    //   const selectedbook = books.find((book) => book._id === _id);
+    //   selectedbook?._id ? setForm(selectedbook) : navigate("/user/books");
+    // }
+    const selectedbook = books.find((book) => book._id === _id);
+    selectedbook ? setForm(selectedbook) : navigate("/user/books");
+  }, [books, _id, navigate, setForm]);
   const handleOnImageSelect = (e) => {
     if (e.target.files.length > 2) {
       e.target.value = "";
@@ -75,7 +85,11 @@ const EditBookForm = () => {
     imagestodelete.map((image) => formdata.append("imageTodelete", image));
 
     const result = await updateBookApi(formdata);
-    console.log(result);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+    dispatch(adminFetchBookAction());
   };
   // console.log(form);
   return (
@@ -115,13 +129,14 @@ const EditBookForm = () => {
                   name="imgUrl"
                   label="Make Thumbnail"
                   checked={form.imgUrl === img}
+                  // checked={false}
                   value={img}
                   onChange={handleOnChange}
                 />
                 <Form.Check
                   type="checkbox"
                   label="Delete"
-                  value={img}
+                  value={[img]}
                   onChange={handleOnDeleteImages}
                 />
               </div>
@@ -136,6 +151,7 @@ const EditBookForm = () => {
               multiple
               accept="image/*"
               onChange={handleOnImageSelect}
+              ref={fileInputRef}
             />
           </Form.Group>
 

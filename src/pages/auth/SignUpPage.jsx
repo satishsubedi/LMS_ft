@@ -42,7 +42,7 @@ const SignUpPage = () => {
     if (result.status === "success") {
       SignUpInputes.map((items, key) => {
         key = items.name;
-        setForm((items.name = {}));
+        setForm((items.value = ""));
       });
     }
 

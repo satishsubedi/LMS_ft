@@ -27,6 +27,7 @@ const AppRoute = () => {
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<HomePage />} />
         <Route path="signup" element={<SignUpPage />} />
+        <Route path="/book/public/:slug" element={<BookLandingPage />} />
         <Route path="login" element={<SignInPage />} />
         <Route path="activate-user" element={<Verify_UserPage />} />
         <Route path="forget-password" element={<ForgetPassword />} />
