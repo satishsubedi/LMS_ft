@@ -20,21 +20,42 @@ const SignInPage = () => {
   const showSpinnerRef = useRef(true);
   const { user } = useSelector((state) => state.userInfo);
   const location = useLocation();
-  console.log(location);
   const path = location?.state?.from ?? "/user";
+
+  // useEffect(() => {
+  //   user?._id ? navigate(path) : dispatch(autoLoginUser());
+  //   if (
+  //     sessionStorage.getItem("accesstoken") ||
+  //     localStorage.getItem("refreshtoken")
+  //   ) {
+  //     setTimeout(() => {
+  //       showSpinnerRef.current = false;
+  //     }, 2000);
+  //   } else {
+  //     showSpinnerRef.current = false;
+  //   }
+  // }, [user?._id, navigate, dispatch, path]);
+
   useEffect(() => {
-    user?._id ? navigate(path) : dispatch(autoLoginUser());
-    if (
+    const hasTokens = () =>
       sessionStorage.getItem("accesstoken") ||
-      localStorage.getItem("refreshtoken")
-    ) {
+      localStorage.getItem("refreshtoken");
+
+    const stopSpinner = (delay = 0) => {
       setTimeout(() => {
         showSpinnerRef.current = false;
-      }, 2000);
+      }, delay);
+    };
+
+    if (user?._id) {
+      navigate(path);
     } else {
-      showSpinnerRef.current = false;
+      dispatch(autoLoginUser());
     }
-  }, [user?._id, navigate, dispatch]);
+
+    hasTokens() ? stopSpinner(2000) : stopSpinner(0);
+  }, [user?._id, navigate, dispatch, path]);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     console.log(form);
@@ -55,7 +76,7 @@ const SignInPage = () => {
   };
   if (showSpinnerRef.current) {
     return (
-      <div className="vh-100 d-flex justify-content-center align-items-center ">
+      <div className="vh-100 d-flex justify-content-center align-items-center  ">
         <Spinner animation="border" variant="primary" />
       </div>
     );

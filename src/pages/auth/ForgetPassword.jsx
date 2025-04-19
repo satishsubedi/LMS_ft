@@ -10,7 +10,7 @@ import { getOTP, resetPasswordApi } from "../../services/authAPI.js";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {};
-const RequestOTPAgain = 10;
+const RequestOTPAgain = 60;
 const ForgetPassword = () => {
   const navigate = useNavigate();
   const emailRef = useRef("");
@@ -37,7 +37,7 @@ const ForgetPassword = () => {
     const { status } = await getOTP({ email });
     status === "success" && setPasswordReset(true);
     setIsOTPPending(false);
-    setIsBtnDisabled(true);
+    // setIsBtnDisabled(true);
     setCounter(RequestOTPAgain);
   };
   const handleOnPasswordReset = async (e) => {

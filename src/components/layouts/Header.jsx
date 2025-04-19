@@ -38,7 +38,7 @@ export const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
         <Navbar.Collapse id="basic-navbar-nav " className="mt-2">
-          <div className="w-100 d-flex justify-content-between flex-column flex-md-row">
+          <div className="w-100 d-flex justify-content-between flex-column flex-md-row ">
             <div></div>
 
             <Form style={{ width: "40%" }}>
@@ -68,6 +68,7 @@ export const Header = () => {
                     <IoIosLogOut />
                     Log Out
                   </Link>
+                  <div className="nav-link fw-bolder  user">{user.fName}</div>
                 </>
               ) : (
                 <>

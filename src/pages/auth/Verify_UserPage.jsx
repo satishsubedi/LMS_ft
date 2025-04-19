@@ -11,24 +11,51 @@ const Verify_UserPage = () => {
   const shouldFetchRef = useRef(true);
   const sessionid = searchParams.get("sessionid");
   const t = searchParams.get("t");
-  useEffect(() => {
-    if (sessionid && t && shouldFetchRef.current) {
-      // call api
-      (async () => {
-        const result = await verifyNewUserApi({
-          sessionid,
-          t,
-        });
+  // useEffect(() => {
+  //   if (sessionid && t && shouldFetchRef.current) {
+  //     // call api
+  //     (async () => {
+  //       const result = await verifyNewUserApi({
+  //         sessionid,
+  //         t,
+  //       });
 
+  //       setResponse(result);
+  //       setShowSpinner(false);
+  //       shouldFetchRef.current = false;
+  //     })();
+  //   }
+  //   if (response.status === "success") {
+  //     setTimeout(() => {
+  //       navigate("/login");
+  //     }, 3000);
+  //   }
+  // }, [sessionid, t, response.status, navigate]);
+
+  useEffect(() => {
+    const fetchUserVerification = async () => {
+      try {
+        const result = await verifyNewUserApi({ sessionid, t });
+        console.log(result);
         setResponse(result);
+      } catch (error) {
+        console.error("Verification failed:", error);
+      } finally {
         setShowSpinner(false);
         shouldFetchRef.current = false;
-      })();
+      }
+    };
+
+    if (sessionid && t && shouldFetchRef.current) {
+      fetchUserVerification();
     }
+
     if (response.status === "success") {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         navigate("/login");
       }, 3000);
+
+      return () => clearTimeout(timeoutId); // cleanup if component unmounts
     }
   }, [sessionid, t, response.status, navigate]);
 
