@@ -17,9 +17,11 @@ import {
   UserPage,
   ProfilePage,
   Verify_UserPage,
+  AllBooks,
 } from "../pages";
 import { DefaultLayout } from "@components/layouts/DefaultLayout";
 import { UserLayout } from "@components/layouts/UserLayout";
+import SearchBook from "../pages/books/SearchBook";
 const AppRoute = () => {
   return (
     <Routes>
@@ -31,6 +33,8 @@ const AppRoute = () => {
         <Route path="login" element={<SignInPage />} />
         <Route path="activate-user" element={<Verify_UserPage />} />
         <Route path="forget-password" element={<ForgetPassword />} />
+        <Route path="all-books" element={<AllBooks />} />
+        <Route path="search" element={<SearchBook />} />
       </Route>
       {/* private page */}
       <Route path="/user" element={<UserLayout />}>

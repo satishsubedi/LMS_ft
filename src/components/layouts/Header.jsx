@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/lmslogo.jpg";
 import { IoHome } from "react-icons/io5";
 import { VscSignIn } from "react-icons/vsc";
@@ -12,11 +12,15 @@ import { RiDashboard3Fill } from "react-icons/ri";
 import { IoIosLogOut } from "react-icons/io";
 import { logoutUserApi } from "../../services/authAPI";
 import { setUser } from "../../features/user/userSlice";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
+import { LiaBookSolid } from "react-icons/lia";
 
 import InputGroup from "react-bootstrap/InputGroup";
+import { useRef } from "react";
 export const Header = () => {
+  const inputelement = useRef("");
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
 
@@ -27,6 +31,11 @@ export const Header = () => {
     sessionStorage.removeItem("accesstoken");
     localStorage.removeItem("refreshtoken");
     dispatch(setUser({}));
+  };
+
+  const handleOnSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?query=${inputelement.current.value}`);
   };
   return (
     <Navbar expand="md" className="bg-success" variant="dark">
@@ -41,20 +50,28 @@ export const Header = () => {
           <div className="w-100 d-flex justify-content-between flex-column flex-md-row ">
             <div></div>
 
-            <Form style={{ width: "40%" }}>
+            <Form style={{ width: "40%" }} onSubmit={handleOnSearch}>
               <InputGroup>
                 <Form.Control
                   placeholder="Search Book"
                   aria-label="Recipient's username"
                   aria-describedby="basic-addon2"
+                  ref={inputelement}
                 />
-                <InputGroup.Text id="basic-addon2" className="bg-warning">
+                <InputGroup.Text
+                  id="basic-addon2"
+                  as="button"
+                  className="bg-warning"
+                >
                   <FaSearch />
                 </InputGroup.Text>
               </InputGroup>
             </Form>
 
             <Nav>
+              <Link className="nav-link " to="/all-books">
+                <LiaBookSolid /> Books
+              </Link>
               <Link className="nav-link " to="/">
                 <IoHome /> Home
               </Link>

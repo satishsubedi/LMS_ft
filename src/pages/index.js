@@ -4,6 +4,7 @@ export { default as SignInPage } from "../pages/auth/SignInPage";
 export { default as Verify_UserPage } from "../pages/auth/Verify_UserPage";
 export { default as SignUpPage } from "../pages/auth/SignUpPage";
 export { default as ForgetPassword } from "../pages/auth/ForgetPassword";
+export { default as AllBooks } from "../pages/books/AllBooks";
 
 // private pages
 export { default as BookLandingPage } from "../pages/books/BookLandingPage";
